@@ -3,7 +3,7 @@ package com.mbj.doeat.service.party;
 import com.mbj.doeat.dto.party.PartyCreateRequestDto;
 import com.mbj.doeat.dto.party.PartyCreateResponseDto;
 import com.mbj.doeat.entity.Party;
-import com.mbj.doeat.mapper.user.PartyMapper;
+import com.mbj.doeat.mapper.party.PartyMapper;
 import com.mbj.doeat.repository.PartyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

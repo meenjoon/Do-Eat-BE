@@ -1,4 +1,4 @@
-package com.mbj.doeat.mapper.user;
+package com.mbj.doeat.mapper.party;
 
 import com.mbj.doeat.dto.party.PartyCreateRequestDto;
 import com.mbj.doeat.dto.party.PartyCreateResponseDto;
