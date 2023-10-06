@@ -4,7 +4,7 @@ import com.mbj.doeat.dto.user.UserRequestDto;
 import com.mbj.doeat.dto.user.UserResponseDto;
 import com.mbj.doeat.entity.User;
 import com.mbj.doeat.mapper.user.UserMapper;
-import com.mbj.doeat.service.UserService;
+import com.mbj.doeat.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.mbj.doeat.service;
+package com.mbj.doeat.service.user;
 
 import com.mbj.doeat.dto.user.UserRequestDto;
 import com.mbj.doeat.entity.User;
