@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Jasy(암호화) 파일 ###
+JasyptConfig.java
