@@ -14,12 +14,12 @@ public class UserMapper {
         return user;
     }
 
-    public static UserResponseDto toUserResponseDto(User user) {
-        UserResponseDto responseDto = new UserResponseDto();
-        responseDto.setUserId(user.getUserId());
-        responseDto.setKakaoUserId(user.getKakaoUserId());
-        responseDto.setUserNickname(user.getNickname());
-        responseDto.setUserImageUrl(user.getImageUrl());
-        return responseDto;
+    public static User userResponseDtoToUser(UserResponseDto responseDto) {
+        User user = new User();
+        user.setUserId(responseDto.getUserId());
+        user.setKakaoUserId(responseDto.getKakaoUserId());
+        user.setNickname(responseDto.getUserNickname());
+        user.setImageUrl(responseDto.getUserImageUrl());
+        return user;
     }
 }
