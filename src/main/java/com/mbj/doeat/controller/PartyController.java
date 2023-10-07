@@ -37,4 +37,15 @@ public class PartyController {
             return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/restaurant/{restaurantLocation}")
+    public ResponseEntity<?> getPartiesByLocation(@PathVariable String restaurantLocation) {
+        try {
+            List<PartyCreateResponseDto> parties = partyService.getPartiesByLocation(restaurantLocation);
+            return new ResponseEntity<>(parties, HttpStatus.OK);
+        } catch (Exception e) {
+            String errorMessage = "오류가 발생했습니다: " + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
