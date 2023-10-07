@@ -8,6 +8,9 @@ import com.mbj.doeat.repository.PartyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class PartyServiceImpl implements PartyService {
@@ -19,5 +22,13 @@ public class PartyServiceImpl implements PartyService {
         Party party = PartyMapper.mapToEntity(requestDto);
         Party savedParty = partyRepository.save(party);
         return PartyMapper.mapToResponseDto(savedParty);
+    }
+
+    @Override
+    public List<PartyCreateResponseDto> getAllParties() {
+        List<Party> parties = partyRepository.findAll();
+        return parties.stream()
+                .map(PartyMapper::mapToResponseDto)
+                .collect(Collectors.toList());
     }
 }
