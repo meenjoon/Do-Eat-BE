@@ -31,4 +31,12 @@ public class PartyServiceImpl implements PartyService {
                 .map(PartyMapper::mapToResponseDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<PartyCreateResponseDto> getPartiesByLocation(String restaurantLocation) {
+        List<Party> parties = partyRepository.findByRestaurantLocation(restaurantLocation);
+        return parties.stream()
+                .map(PartyMapper::mapToResponseDto)
+                .collect(Collectors.toList());
+    }
 }

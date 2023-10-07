@@ -9,4 +9,6 @@ public interface PartyService {
     PartyCreateResponseDto createParty(PartyCreateRequestDto requestDto);
 
     List<PartyCreateResponseDto> getAllParties();
+
+    List<PartyCreateResponseDto> getPartiesByLocation(String restaurantLocation);
 }
