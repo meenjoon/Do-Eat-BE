@@ -1,5 +1,6 @@
 package com.mbj.doeat.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Setter
 @Table(name = "party")
 @NoArgsConstructor
+@AllArgsConstructor
 public class Party {
 
     @Id
@@ -18,8 +20,9 @@ public class Party {
     @Column(name = "post_id")
     private Long postId;
 
-    @Column(nullable = false, name = "user_id")
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private User user;
 
     @Column(nullable = false, name = "restaurant_name")
     private String restaurantName;

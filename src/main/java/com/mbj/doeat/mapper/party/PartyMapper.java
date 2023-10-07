@@ -3,12 +3,13 @@ package com.mbj.doeat.mapper.party;
 import com.mbj.doeat.dto.party.PartyCreateRequestDto;
 import com.mbj.doeat.dto.party.PartyCreateResponseDto;
 import com.mbj.doeat.entity.Party;
+import com.mbj.doeat.entity.User;
 
 public class PartyMapper {
 
-    public static Party mapToEntity(PartyCreateRequestDto requestDto) {
+    public static Party mapToEntity(PartyCreateRequestDto requestDto, User user) {
         Party party = new Party();
-        party.setUserId(requestDto.getUserId());
+        party.setUser(user);
         party.setRestaurantName(requestDto.getRestaurantName());
         party.setRestaurantLocation(requestDto.getRestaurantLocation());
         party.setRecruitmentLimit(requestDto.getRecruitmentLimit());
@@ -21,7 +22,7 @@ public class PartyMapper {
     public static PartyCreateResponseDto mapToResponseDto(Party party) {
         PartyCreateResponseDto responseDto = new PartyCreateResponseDto();
         responseDto.setPostId(party.getPostId());
-        responseDto.setUserId(party.getUserId());
+        responseDto.setUserId(party.getUser().getUserId());
         responseDto.setRestaurantName(party.getRestaurantName());
         responseDto.setRestaurantLocation(party.getRestaurantLocation());
         responseDto.setRecruitmentLimit(party.getRecruitmentLimit());
