@@ -51,4 +51,12 @@ public class PartyServiceImpl implements PartyService {
                 .map(PartyMapper::mapToResponseDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<PartyCreateResponseDto> getMyParties(PartyUserViewRequestDto partyUserViewRequestDto) {
+        List<Party> parties = partyRepository.findByUserUserId(partyUserViewRequestDto.getUserId());
+        return parties.stream()
+                .map(PartyMapper::mapToResponseDto)
+                .collect(Collectors.toList());
+    }
 }
