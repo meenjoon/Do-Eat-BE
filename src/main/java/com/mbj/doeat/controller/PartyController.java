@@ -2,6 +2,7 @@ package com.mbj.doeat.controller;
 
 import com.mbj.doeat.dto.party.PartyCreateRequestDto;
 import com.mbj.doeat.dto.party.PartyCreateResponseDto;
+import com.mbj.doeat.dto.party.PartyUserViewRequestDto;
 import com.mbj.doeat.service.party.PartyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -42,6 +43,17 @@ public class PartyController {
     public ResponseEntity<?> getPartiesByLocation(@PathVariable String restaurantLocation) {
         try {
             List<PartyCreateResponseDto> parties = partyService.getPartiesByLocation(restaurantLocation);
+            return new ResponseEntity<>(parties, HttpStatus.OK);
+        } catch (Exception e) {
+            String errorMessage = "오류가 발생했습니다: " + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/my-parties")
+    public ResponseEntity<?> getMyParties(@RequestBody PartyUserViewRequestDto partyUserViewRequestDto){
+        try {
+            List<PartyCreateResponseDto> parties = partyService.getMyParties(partyUserViewRequestDto);
             return new ResponseEntity<>(parties, HttpStatus.OK);
         } catch (Exception e) {
             String errorMessage = "오류가 발생했습니다: " + e.getMessage();
