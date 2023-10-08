@@ -59,4 +59,9 @@ public class PartyServiceImpl implements PartyService {
                 .map(PartyMapper::mapToResponseDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteParty(Long partyId) {
+        partyRepository.deleteById(partyId);
+    }
 }

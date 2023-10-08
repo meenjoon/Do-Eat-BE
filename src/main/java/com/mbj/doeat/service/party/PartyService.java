@@ -15,4 +15,6 @@ public interface PartyService {
     List<PartyCreateResponseDto> getPartiesByLocation(String restaurantLocation);
 
     List<PartyCreateResponseDto> getMyParties(PartyUserViewRequestDto partyUserViewRequestDto);
+
+    void deleteParty(Long partyId);
 }
