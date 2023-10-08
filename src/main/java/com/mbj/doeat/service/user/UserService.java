@@ -1,15 +1,15 @@
 package com.mbj.doeat.service.user;
 
 import com.mbj.doeat.dto.user.UserCreateRequestDto;
-import com.mbj.doeat.dto.user.UserResponseDto;
+import com.mbj.doeat.dto.user.UserCreateResponseDto;
 
 public interface UserService {
 
-    UserResponseDto findUser(String kakaoUserId);
+    UserCreateResponseDto findUser(String kakaoUserId);
 
-    UserResponseDto createUser(UserCreateRequestDto userCreateRequestDto);
+    UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto);
 
-    UserResponseDto updateUser(UserResponseDto userResponseDto, UserCreateRequestDto userCreateRequestDto);
+    UserCreateResponseDto updateUser(UserCreateResponseDto userCreateResponseDto, UserCreateRequestDto userCreateRequestDto);
 
     void deleteUser(Long userId);
 }

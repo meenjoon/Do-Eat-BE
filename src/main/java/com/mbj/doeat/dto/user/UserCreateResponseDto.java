@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponseDto {
+public class UserCreateResponseDto {
 
     private Long userId;
     private String kakaoUserId;

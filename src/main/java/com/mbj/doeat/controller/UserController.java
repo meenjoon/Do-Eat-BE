@@ -2,7 +2,7 @@ package com.mbj.doeat.controller;
 
 import com.mbj.doeat.dto.user.UserIdRequestDto;
 import com.mbj.doeat.dto.user.UserCreateRequestDto;
-import com.mbj.doeat.dto.user.UserResponseDto;
+import com.mbj.doeat.dto.user.UserCreateResponseDto;
 import com.mbj.doeat.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class UserController {
     public ResponseEntity<?> signIn(@RequestBody UserCreateRequestDto userCreateRequestDto) {
         String kakaoUserId = userCreateRequestDto.getKakaoUserId();
 
-        UserResponseDto existingUser;
+        UserCreateResponseDto existingUser;
         try {
             existingUser = userService.findUser(kakaoUserId);
         } catch (Exception e) {
@@ -30,7 +30,7 @@ public class UserController {
 
         if (existingUser == null) {
             try {
-                UserResponseDto newUser = userService.createUser(userCreateRequestDto);
+                UserCreateResponseDto newUser = userService.createUser(userCreateRequestDto);
                 return new ResponseEntity<>(newUser, HttpStatus.CREATED);
             } catch (Exception e) {
                 String errorMessage = "오류가 발생했습니다: " + e.getMessage();
@@ -38,7 +38,7 @@ public class UserController {
             }
         } else {
             try {
-                UserResponseDto updateUser = userService.updateUser(existingUser, userCreateRequestDto);
+                UserCreateResponseDto updateUser = userService.updateUser(existingUser, userCreateRequestDto);
                 return new ResponseEntity<>(updateUser, HttpStatus.OK);
             } catch (Exception e) {
                 String errorMessage = "오류가 발생했습니다: " + e.getMessage();

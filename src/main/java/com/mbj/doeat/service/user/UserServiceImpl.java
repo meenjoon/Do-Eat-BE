@@ -1,7 +1,7 @@
 package com.mbj.doeat.service.user;
 
 import com.mbj.doeat.dto.user.UserCreateRequestDto;
-import com.mbj.doeat.dto.user.UserResponseDto;
+import com.mbj.doeat.dto.user.UserCreateResponseDto;
 import com.mbj.doeat.entity.User;
 import com.mbj.doeat.mapper.user.UserMapper;
 import com.mbj.doeat.repository.PartyRepository;
@@ -19,29 +19,29 @@ public class UserServiceImpl implements UserService {
     private final PartyRepository partyRepository;
 
     @Override
-    public UserResponseDto findUser(String kakaoUserId) {
+    public UserCreateResponseDto findUser(String kakaoUserId) {
         Optional<User> userOptional = Optional.ofNullable(userRepository.findByKakaoUserId(kakaoUserId));
         return userOptional.map(user ->
-                        new UserResponseDto(user.getUserId(), user.getKakaoUserId(), user.getNickname(), user.getImageUrl()))
+                        new UserCreateResponseDto(user.getUserId(), user.getKakaoUserId(), user.getNickname(), user.getImageUrl()))
                 .orElse(null);
     }
 
     @Override
-    public UserResponseDto createUser(UserCreateRequestDto userCreateRequestDto) {
+    public UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto) {
         User newUser = UserMapper.toUser(userCreateRequestDto);
         userRepository.save(newUser);
         return findUser(userCreateRequestDto.getKakaoUserId());
     }
 
     @Override
-    public UserResponseDto updateUser(UserResponseDto userResponseDto, UserCreateRequestDto userCreateRequestDto) {
-        userResponseDto.setKakaoUserId(userCreateRequestDto.getKakaoUserId());
-        userResponseDto.setUserNickname(userCreateRequestDto.getUserNickname());
-        userResponseDto.setUserImageUrl(userCreateRequestDto.getUserImageUrl());
+    public UserCreateResponseDto updateUser(UserCreateResponseDto userCreateResponseDto, UserCreateRequestDto userCreateRequestDto) {
+        userCreateResponseDto.setKakaoUserId(userCreateRequestDto.getKakaoUserId());
+        userCreateResponseDto.setUserNickname(userCreateRequestDto.getUserNickname());
+        userCreateResponseDto.setUserImageUrl(userCreateRequestDto.getUserImageUrl());
 
-        User updatedUser = UserMapper.userResponseDtoToUser(userResponseDto);
+        User updatedUser = UserMapper.userResponseDtoToUser(userCreateResponseDto);
         userRepository.save(updatedUser);
-        return userResponseDto;
+        return userCreateResponseDto;
     }
 
     @Override
