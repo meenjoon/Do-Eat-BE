@@ -1,12 +1,12 @@
 package com.mbj.doeat.mapper.user;
 
-import com.mbj.doeat.dto.user.UserRequestDto;
+import com.mbj.doeat.dto.user.UserCreateRequestDto;
 import com.mbj.doeat.dto.user.UserResponseDto;
 import com.mbj.doeat.entity.User;
 
 public class UserMapper {
 
-    public static User toUser(UserRequestDto requestDto) {
+    public static User toUser(UserCreateRequestDto requestDto) {
         User user = new User();
         user.setKakaoUserId(requestDto.getKakaoUserId());
         user.setNickname(requestDto.getUserNickname());

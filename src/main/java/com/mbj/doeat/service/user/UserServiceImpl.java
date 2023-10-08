@@ -1,6 +1,6 @@
 package com.mbj.doeat.service.user;
 
-import com.mbj.doeat.dto.user.UserRequestDto;
+import com.mbj.doeat.dto.user.UserCreateRequestDto;
 import com.mbj.doeat.dto.user.UserResponseDto;
 import com.mbj.doeat.entity.User;
 import com.mbj.doeat.mapper.user.UserMapper;
@@ -27,17 +27,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDto createUser(UserRequestDto userRequestDto) {
-        User newUser = UserMapper.toUser(userRequestDto);
+    public UserResponseDto createUser(UserCreateRequestDto userCreateRequestDto) {
+        User newUser = UserMapper.toUser(userCreateRequestDto);
         userRepository.save(newUser);
-        return findUser(userRequestDto.getKakaoUserId());
+        return findUser(userCreateRequestDto.getKakaoUserId());
     }
 
     @Override
-    public UserResponseDto updateUser(UserResponseDto userResponseDto, UserRequestDto userRequestDto) {
-        userResponseDto.setKakaoUserId(userRequestDto.getKakaoUserId());
-        userResponseDto.setUserNickname(userRequestDto.getUserNickname());
-        userResponseDto.setUserImageUrl(userRequestDto.getUserImageUrl());
+    public UserResponseDto updateUser(UserResponseDto userResponseDto, UserCreateRequestDto userCreateRequestDto) {
+        userResponseDto.setKakaoUserId(userCreateRequestDto.getKakaoUserId());
+        userResponseDto.setUserNickname(userCreateRequestDto.getUserNickname());
+        userResponseDto.setUserImageUrl(userCreateRequestDto.getUserImageUrl());
 
         User updatedUser = UserMapper.userResponseDtoToUser(userResponseDto);
         userRepository.save(updatedUser);
