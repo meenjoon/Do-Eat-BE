@@ -10,4 +10,6 @@ public interface PartyRepository extends JpaRepository<Party, Long> {
     List<Party> findByRestaurantLocation(String restaurantLocation);
 
     List<Party> findByUserUserId(Long userId);
+
+    void deleteAllByUserUserId(Long userId);
 }
