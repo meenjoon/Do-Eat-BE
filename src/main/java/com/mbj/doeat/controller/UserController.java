@@ -1,6 +1,6 @@
 package com.mbj.doeat.controller;
 
-import com.mbj.doeat.dto.party.PartyUserViewRequestDto;
+import com.mbj.doeat.dto.user.UserIdRequestDto;
 import com.mbj.doeat.dto.user.UserRequestDto;
 import com.mbj.doeat.dto.user.UserResponseDto;
 import com.mbj.doeat.service.user.UserService;
@@ -48,9 +48,9 @@ public class UserController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?> userDelete(@RequestBody PartyUserViewRequestDto partyUserViewRequestDto) {
+    public ResponseEntity<?> userDelete(@RequestBody UserIdRequestDto userIdRequestDto) {
         try {
-            userService.deleteUser(partyUserViewRequestDto.getUserId());
+            userService.deleteUser(userIdRequestDto.getUserId());
             return new ResponseEntity<>("삭제 하였습니다.", HttpStatus.OK);
         } catch (Exception e) {
             String errorMessage = "오류가 발생했습니다: " + e.getMessage();

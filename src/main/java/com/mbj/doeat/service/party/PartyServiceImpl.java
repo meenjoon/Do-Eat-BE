@@ -2,7 +2,7 @@ package com.mbj.doeat.service.party;
 
 import com.mbj.doeat.dto.party.PartyCreateRequestDto;
 import com.mbj.doeat.dto.party.PartyCreateResponseDto;
-import com.mbj.doeat.dto.party.PartyUserViewRequestDto;
+import com.mbj.doeat.dto.user.UserIdRequestDto;
 import com.mbj.doeat.entity.Party;
 import com.mbj.doeat.entity.User;
 import com.mbj.doeat.mapper.party.PartyMapper;
@@ -53,8 +53,8 @@ public class PartyServiceImpl implements PartyService {
     }
 
     @Override
-    public List<PartyCreateResponseDto> getMyParties(PartyUserViewRequestDto partyUserViewRequestDto) {
-        List<Party> parties = partyRepository.findByUserUserId(partyUserViewRequestDto.getUserId());
+    public List<PartyCreateResponseDto> getMyParties(UserIdRequestDto userIdRequestDto) {
+        List<Party> parties = partyRepository.findByUserUserId(userIdRequestDto.getUserId());
         return parties.stream()
                 .map(PartyMapper::mapToResponseDto)
                 .collect(Collectors.toList());
