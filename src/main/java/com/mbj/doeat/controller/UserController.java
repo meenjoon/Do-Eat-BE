@@ -1,15 +1,13 @@
 package com.mbj.doeat.controller;
 
+import com.mbj.doeat.dto.party.PartyUserViewRequestDto;
 import com.mbj.doeat.dto.user.UserRequestDto;
 import com.mbj.doeat.dto.user.UserResponseDto;
 import com.mbj.doeat.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -46,6 +44,17 @@ public class UserController {
                 String errorMessage = "오류가 발생했습니다: " + e.getMessage();
                 return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
             }
+        }
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> userDelete(@RequestBody PartyUserViewRequestDto partyUserViewRequestDto) {
+        try {
+            userService.deleteUser(partyUserViewRequestDto.getUserId());
+            return new ResponseEntity<>("삭제 하였습니다.", HttpStatus.OK);
+        } catch (Exception e) {
+            String errorMessage = "오류가 발생했습니다: " + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
