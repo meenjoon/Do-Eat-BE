@@ -4,10 +4,11 @@ import com.mbj.doeat.dto.user.UserRequestDto;
 import com.mbj.doeat.dto.user.UserResponseDto;
 import com.mbj.doeat.entity.User;
 import com.mbj.doeat.mapper.user.UserMapper;
+import com.mbj.doeat.repository.PartyRepository;
 import com.mbj.doeat.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PartyRepository partyRepository;
 
     @Override
     public UserResponseDto findUser(String kakaoUserId) {
@@ -40,5 +42,12 @@ public class UserServiceImpl implements UserService {
         User updatedUser = UserMapper.userResponseDtoToUser(userResponseDto);
         userRepository.save(updatedUser);
         return userResponseDto;
+    }
+
+    @Override
+    @Transactional
+    public void deleteUser(Long userId) {
+        partyRepository.deleteAllByUserUserId(userId);
+        userRepository.deleteById(userId);
     }
 }
