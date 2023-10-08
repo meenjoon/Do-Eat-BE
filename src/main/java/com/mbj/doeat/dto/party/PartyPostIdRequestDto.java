@@ -9,6 +9,6 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PartyDeleteDto {
+public class PartyPostIdRequestDto {
     Long partyId;
 }
