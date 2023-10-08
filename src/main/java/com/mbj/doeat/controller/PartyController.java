@@ -2,6 +2,7 @@ package com.mbj.doeat.controller;
 
 import com.mbj.doeat.dto.party.PartyCreateRequestDto;
 import com.mbj.doeat.dto.party.PartyCreateResponseDto;
+import com.mbj.doeat.dto.party.PartyDeleteDto;
 import com.mbj.doeat.dto.party.PartyUserViewRequestDto;
 import com.mbj.doeat.service.party.PartyService;
 import lombok.RequiredArgsConstructor;
@@ -55,6 +56,17 @@ public class PartyController {
         try {
             List<PartyCreateResponseDto> parties = partyService.getMyParties(partyUserViewRequestDto);
             return new ResponseEntity<>(parties, HttpStatus.OK);
+        } catch (Exception e) {
+            String errorMessage = "오류가 발생했습니다: " + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> partyDelete(@RequestBody PartyDeleteDto partyDeleteDto) {
+        try {
+            partyService.deleteParty(partyDeleteDto.getPartyId());
+            return new ResponseEntity<>("삭제 하였습니다.", HttpStatus.OK);
         } catch (Exception e) {
             String errorMessage = "오류가 발생했습니다: " + e.getMessage();
             return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
