@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 public class UserCreateRequestDto {
 
-    private String kakaoUserId;
+    private Long kakaoUserId;
     private String userNickname;
     private String userImageUrl;
 }

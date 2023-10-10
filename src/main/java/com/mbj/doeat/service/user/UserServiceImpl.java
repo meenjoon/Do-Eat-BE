@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     private final PartyRepository partyRepository;
 
     @Override
-    public UserCreateResponseDto findUser(String kakaoUserId) {
+    public UserCreateResponseDto findUser(Long kakaoUserId) {
         Optional<User> userOptional = Optional.ofNullable(userRepository.findByKakaoUserId(kakaoUserId));
         return userOptional.map(user ->
                         new UserCreateResponseDto(user.getUserId(), user.getKakaoUserId(), user.getNickname(), user.getImageUrl()))

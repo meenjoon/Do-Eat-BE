@@ -5,7 +5,7 @@ import com.mbj.doeat.dto.user.UserCreateResponseDto;
 
 public interface UserService {
 
-    UserCreateResponseDto findUser(String kakaoUserId);
+    UserCreateResponseDto findUser(Long kakaoUserId);
 
     UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto);
 

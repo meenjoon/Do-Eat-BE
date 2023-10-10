@@ -12,7 +12,7 @@ import lombok.Setter;
 public class UserCreateResponseDto {
 
     private Long userId;
-    private String kakaoUserId;
+    private Long kakaoUserId;
     private String userNickname;
     private String userImageUrl;
 }

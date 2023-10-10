@@ -18,7 +18,7 @@ public class UserController {
 
     @PostMapping("")
     public ResponseEntity<?> signIn(@RequestBody UserCreateRequestDto userCreateRequestDto) {
-        String kakaoUserId = userCreateRequestDto.getKakaoUserId();
+        Long kakaoUserId = userCreateRequestDto.getKakaoUserId();
 
         UserCreateResponseDto existingUser;
         try {
