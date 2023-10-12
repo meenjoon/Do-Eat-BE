@@ -33,5 +33,14 @@ public class Party {
     @Column(nullable = false, name = "recruitment_limit")
     private Integer recruitmentLimit;
 
+    @Column(nullable = false, name = "current_number_people")
+    private Integer currentNumberPeople;
+
+    @Column(nullable = false, name = "restaurant_category")
+    private String restaurantCategory;
+
+    @Column(nullable = false, name = "restaurant_link")
+    private String restaurantLink;
+
     private String detail;
 }

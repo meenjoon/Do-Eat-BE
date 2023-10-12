@@ -13,6 +13,9 @@ public class PartyMapper {
         party.setRestaurantName(requestDto.getRestaurantName());
         party.setRestaurantLocation(requestDto.getRestaurantLocation());
         party.setRecruitmentLimit(requestDto.getRecruitmentLimit());
+        party.setCurrentNumberPeople(requestDto.getCurrentNumberPeople());
+        party.setRestaurantCategory(requestDto.getCategory());
+        party.setRestaurantLink(requestDto.getLink());
         if (requestDto.getDetail() != null) {
             party.setDetail(requestDto.getDetail());
         }
@@ -26,6 +29,9 @@ public class PartyMapper {
         responseDto.setRestaurantName(party.getRestaurantName());
         responseDto.setRestaurantLocation(party.getRestaurantLocation());
         responseDto.setRecruitmentLimit(party.getRecruitmentLimit());
+        responseDto.setCurrentNumberPeople(party.getCurrentNumberPeople());
+        responseDto.setCategory(party.getRestaurantCategory());
+        responseDto.setLink(party.getRestaurantLink());
         responseDto.setDetail(party.getDetail() != null ? party.getDetail() : "");
         return responseDto;
     }
