@@ -1,11 +1,12 @@
 package com.mbj.doeat.service.user;
 
+import com.mbj.doeat.dto.user.FindUserRequestDto;
 import com.mbj.doeat.dto.user.UserCreateRequestDto;
 import com.mbj.doeat.dto.user.UserCreateResponseDto;
 
 public interface UserService {
 
-    UserCreateResponseDto findUser(Long kakaoUserId);
+    UserCreateResponseDto findUser(FindUserRequestDto findUserRequestDto);
 
     UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto);
 

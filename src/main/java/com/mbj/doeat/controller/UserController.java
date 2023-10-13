@@ -1,8 +1,10 @@
 package com.mbj.doeat.controller;
 
+import com.mbj.doeat.dto.user.FindUserRequestDto;
 import com.mbj.doeat.dto.user.UserIdRequestDto;
 import com.mbj.doeat.dto.user.UserCreateRequestDto;
 import com.mbj.doeat.dto.user.UserCreateResponseDto;
+import com.mbj.doeat.mapper.user.UserMapper;
 import com.mbj.doeat.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,9 +22,11 @@ public class UserController {
     public ResponseEntity<?> signIn(@RequestBody UserCreateRequestDto userCreateRequestDto) {
         Long kakaoUserId = userCreateRequestDto.getKakaoUserId();
 
+        FindUserRequestDto findUserRequest = UserMapper.toFindUserRequestDto(userCreateRequestDto);
+
         UserCreateResponseDto existingUser;
         try {
-            existingUser = userService.findUser(kakaoUserId);
+            existingUser = userService.findUser(findUserRequest);
         } catch (Exception e) {
             String errorMessage = "오류가 발생했습니다: " + e.getMessage();
             return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -52,6 +56,22 @@ public class UserController {
         try {
             userService.deleteUser(userIdRequestDto.getUserId());
             return new ResponseEntity<>("삭제 하였습니다.", HttpStatus.OK);
+        } catch (Exception e) {
+            String errorMessage = "오류가 발생했습니다: " + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/find")
+    public ResponseEntity<?> findUser(@RequestBody FindUserRequestDto findUserRequestDto) {
+        try {
+            UserCreateResponseDto userResponse = userService.findUser(findUserRequestDto);
+            if (userResponse != null) {
+                return new ResponseEntity<>(userResponse, HttpStatus.OK);
+            } else {
+                String errorMessage = "사용자를 찾을 수 없습니다.";
+                return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+            }
         } catch (Exception e) {
             String errorMessage = "오류가 발생했습니다: " + e.getMessage();
             return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);

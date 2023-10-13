@@ -1,5 +1,6 @@
 package com.mbj.doeat.service.user;
 
+import com.mbj.doeat.dto.user.FindUserRequestDto;
 import com.mbj.doeat.dto.user.UserCreateRequestDto;
 import com.mbj.doeat.dto.user.UserCreateResponseDto;
 import com.mbj.doeat.entity.User;
@@ -19,8 +20,8 @@ public class UserServiceImpl implements UserService {
     private final PartyRepository partyRepository;
 
     @Override
-    public UserCreateResponseDto findUser(Long kakaoUserId) {
-        Optional<User> userOptional = Optional.ofNullable(userRepository.findByKakaoUserId(kakaoUserId));
+    public UserCreateResponseDto findUser(FindUserRequestDto findUserRequestDto) {
+        Optional<User> userOptional = Optional.ofNullable(userRepository.findByKakaoUserId(findUserRequestDto.getKakaoUserId()));
         return userOptional.map(user ->
                         new UserCreateResponseDto(user.getUserId(), user.getKakaoUserId(), user.getNickname(), user.getImageUrl()))
                 .orElse(null);
@@ -30,7 +31,9 @@ public class UserServiceImpl implements UserService {
     public UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto) {
         User newUser = UserMapper.toUser(userCreateRequestDto);
         userRepository.save(newUser);
-        return findUser(userCreateRequestDto.getKakaoUserId());
+
+        FindUserRequestDto findUserRequestDto = UserMapper.toFindUserRequestDto(userCreateRequestDto);
+        return findUser(findUserRequestDto);
     }
 
     @Override
