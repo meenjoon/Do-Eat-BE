@@ -65,7 +65,7 @@ public class PartyController {
     @DeleteMapping("/delete")
     public ResponseEntity<?> partyDelete(@RequestBody PartyPostIdRequestDto partyPostIdRequestDto) {
         try {
-            partyService.deleteParty(partyPostIdRequestDto.getPartyId());
+            partyService.deleteParty(partyPostIdRequestDto.getPostId());
             return new ResponseEntity<>("삭제 하였습니다.", HttpStatus.OK);
         } catch (Exception e) {
             String errorMessage = "오류가 발생했습니다: " + e.getMessage();
