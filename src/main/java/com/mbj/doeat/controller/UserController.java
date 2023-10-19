@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -68,6 +69,22 @@ public class UserController {
             UserCreateResponseDto userResponse = userService.findUser(findUserRequestDto);
             if (userResponse != null) {
                 return new ResponseEntity<>(userResponse, HttpStatus.OK);
+            } else {
+                String errorMessage = "사용자를 찾을 수 없습니다.";
+                return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            String errorMessage = "오류가 발생했습니다: " + e.getMessage();
+            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllUsers() {
+        try {
+            List<UserCreateResponseDto> users = userService.getAllUser();
+            if (users != null && !users.isEmpty()) {
+                return new ResponseEntity<>(users, HttpStatus.OK);
             } else {
                 String errorMessage = "사용자를 찾을 수 없습니다.";
                 return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
