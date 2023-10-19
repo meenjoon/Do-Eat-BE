@@ -3,14 +3,19 @@ package com.mbj.doeat.service.user;
 import com.mbj.doeat.dto.user.FindUserRequestDto;
 import com.mbj.doeat.dto.user.UserCreateRequestDto;
 import com.mbj.doeat.dto.user.UserCreateResponseDto;
+import com.mbj.doeat.entity.Party;
 import com.mbj.doeat.entity.User;
+import com.mbj.doeat.mapper.party.PartyMapper;
 import com.mbj.doeat.mapper.user.UserMapper;
 import com.mbj.doeat.repository.PartyRepository;
 import com.mbj.doeat.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -45,6 +50,14 @@ public class UserServiceImpl implements UserService {
         User updatedUser = UserMapper.userResponseDtoToUser(userCreateResponseDto);
         userRepository.save(updatedUser);
         return userCreateResponseDto;
+    }
+
+    @Override
+    public List<UserCreateResponseDto> getAllUser() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(UserMapper::userToUserCreateResponseDto)
+                .collect(Collectors.toList());
     }
 
     @Override
