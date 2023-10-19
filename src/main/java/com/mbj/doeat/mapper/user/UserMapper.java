@@ -29,4 +29,13 @@ public class UserMapper {
         findUserRequestDto.setKakaoUserId(userCreateRequestDto.getKakaoUserId());
         return findUserRequestDto;
     }
+
+    public static UserCreateResponseDto userToUserCreateResponseDto(User user) {
+        UserCreateResponseDto responseDto = new UserCreateResponseDto();
+        responseDto.setUserId(user.getUserId());
+        responseDto.setKakaoUserId(user.getKakaoUserId());
+        responseDto.setUserNickname(user.getNickname());
+        responseDto.setUserImageUrl(user.getImageUrl());
+        return responseDto;
+    }
 }
