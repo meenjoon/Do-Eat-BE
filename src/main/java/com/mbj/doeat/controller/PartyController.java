@@ -51,7 +51,7 @@ public class PartyController {
         }
     }
 
-    @GetMapping("/my-parties")
+    @PostMapping("/my-parties")
     public ResponseEntity<?> getMyParties(@RequestBody UserIdRequestDto userIdRequestDto){
         try {
             List<PartyCreateResponseDto> parties = partyService.getMyParties(userIdRequestDto);
